@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA HOROLOGY | Ultra-Luxury Timepieces</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0b0b0f',
+                        surface: '#14141c',
+                        cardbg: 'rgba(20, 20, 28, 0.75)',
+                        gold: '#d4af37',
+                        champagne: '#f3e5ab',
+                        bronze: '#8c7853'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0b0b0f;
+            color: #f3e5ab;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-luxury {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-panel {
+            background: rgba(20, 20, 28, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .glass-card {
+            background: rgba(25, 25, 35, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(212, 175, 55, 0.15);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            color: #0b0b0f;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0b0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a38;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="bg-obsidian text-champagne min-h-screen flex flex-col selection:bg-gold selection:text-obsidian">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-gold/20 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold/40 flex items-center justify-center bg-obsidian group-hover:border-gold transition-colors">
+                    <i class="fa-solid fa-clock text-gold text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-luxury font-bold tracking-widest gold-gradient-text">AURA HOROLOGY</span>
+                    <span class="block text-[9px] tracking-[0.3em] text-gold/60 uppercase">Geneva • 1,248 Masterpieces</span>
+                </div>
+            </a>
+
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex items-center relative w-72 lg:w-96">
+                <input type="text" id="searchInput" placeholder="Search by brand, model, complication..." 
+                    class="w-full bg-surface/80 border border-gold/20 rounded-full py-2 pl-10 pr-4 text-sm text-champagne placeholder-champagne/40 focus:outline-none focus:border-gold transition-all">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 text-gold/50 text-sm"></i>
+            </div>
+
+            <!-- Actions & Controls -->
+            <div class="flex items-center space-x-4 sm:space-x-6">
+                <!-- Currency Selector -->
+                <select id="currencySelector" onchange="changeCurrency(this.value)" class="bg-surface border border-gold/30 rounded-lg px-2 py-1.5 text-xs text-champagne focus:outline-none focus:border-gold cursor-pointer">
+                    <option value="USD">$ USD</option>
+                    <option value="EUR">€ EUR</option>
+                    <option value="INR">₹ INR</option>
+                </select>
+
+                <!-- Wishlist Toggle -->
+                <button onclick="toggleWishlistModal()" class="relative p-2 text-champagne/80 hover:text-gold transition-colors" title="Wishlist">
+                    <i class="fa-regular fa-heart text-xl"></i>
+                    <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-gold text-obsidian text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+
+                <!-- Cart Drawer Trigger -->
+                <button onclick="toggleCartDrawer(true)" class="relative p-2.5 glass-card rounded-full flex items-center space-x-2 text-champagne hover:border-gold transition-all">
+                    <i class="fa-solid fa-bag-shopping text-gold text-lg"></i>
+                    <span id="cartCountBadge" class="bg-gold text-obsidian text-xs font-bold px-1.5 py-0.5 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <input type="text" id="mobileSearchInput" placeholder="Search 1000+ luxury watches..." 
+                    class="w-full bg-surface/90 border border-gold/20 rounded-full py-2 pl-10 pr-4 text-sm text-champagne placeholder-champagne/40 focus:outline-none focus:border-gold">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gold/50 text-sm"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative py-20 lg:py-28 overflow-hidden border-b border-gold/10">
+        <div class="absolute inset-0 z-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1920&q=80')"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-transparent z-1"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-start">
+            <span class="inline-block py-1 px-3 rounded-full bg-gold/10 border border-gold/30 text-xs font-semibold tracking-widest uppercase text-gold mb-4">
+                Exclusive Haute Horlogerie
+            </span>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-luxury font-bold tracking-tight max-w-3xl leading-tight mb-6">
+                Timeless Elegance, <span class="gold-gradient-text">Engineered to Perfection.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-champagne/70 max-w-xl mb-8 font-light">
+                Discover our curated vault of over 1,000 certified masterworks from the world's most prestigious Swiss and independent ateliers.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <a href="#catalog-section" class="gold-btn px-8 py-4 rounded-full font-medium tracking-wider uppercase text-sm shadow-lg flex items-center space-x-3">
+                    <span>Explore Collection</span>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <button onclick="openVipConcierge()" class="glass-card px-8 py-4 rounded-full font-medium tracking-wider uppercase text-sm hover:bg-gold/10 transition-all flex items-center space-x-3">
+                    <i class="fa-solid fa-crown text-gold"></i>
+                    <span>VIP Concierge</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Catalog Section -->
+    <main id="catalog-section" class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        
+        <!-- Filter & Category Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 pb-6 border-b border-gold/15">
+            <!-- Categories -->
+            <div id="categoryTabs" class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+                <button onclick="filterCategory('All')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap bg-gold text-obsidian shadow-md" data-category="All">All Masterpieces</button>
+                <button onclick="filterCategory('Chronograph')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Chronograph">Chronograph</button>
+                <button onclick="filterCategory('Automatic')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Automatic">Automatic</button>
+                <button onclick="filterCategory('Diver')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Diver">Diver</button>
+                <button onclick="filterCategory('Tourbillon')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Tourbillon">Tourbillon</button>
+                <button onclick="filterCategory('Minimalist')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Minimalist">Minimalist</button>
+                <button onclick="filterCategory('Heritage')" class="category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold" data-category="Heritage">Heritage</button>
+            </div>
+
+            <!-- Sort & Advanced Filters Toggle -->
+            <div class="flex items-center space-x-4">
+                <span id="productCounter" class="text-xs text-champagne/60 whitespace-nowrap">Showing 1-12 of 1,248 Masterpieces</span>
+                <select id="sortSelect" onchange="sortProducts(this.value)" class="bg-surface border border-gold/30 rounded-lg px-3 py-2 text-xs text-champagne focus:outline-none focus:border-gold cursor-pointer">
+                    <option value="featured">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Secondary Advanced Filters -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10 p-5 glass-panel rounded-2xl">
+            <div>
+                <label class="block text-xs uppercase tracking-wider text-gold mb-2 font-semibold">Filter by Brand</label>
+                <select id="brandFilter" onchange="applyAdvancedFilters()" class="w-full bg-surface border border-gold/20 rounded-lg px-3 py-2 text-sm text-champagne focus:outline-none focus:border-gold">
+                    <option value="All">All Brands (Rolex, Omega, Patek...)</option>
+                    <option value="Rolex">Rolex</option>
+                    <option value="Omega">Omega</option>
+                    <option value="Patek Philippe">Patek Philippe</option>
+                    <option value="Audemars Piguet">Audemars Piguet</option>
+                    <option value="Cartier">Cartier</option>
+                    <option value="Tag Heuer">Tag Heuer</option>
+                    <option value="IWC">IWC Schaffhausen</option>
+                    <option value="Breitling">Breitling</option>
+                    <option value="Vacheron Constantin">Vacheron Constantin</option>
+                    <option value="Hublot">Hublot</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-wider text-gold mb-2 font-semibold">Price Ceiling</label>
+                <select id="priceFilter" onchange="applyAdvancedFilters()" class="w-full bg-surface border border-gold/20 rounded-lg px-3 py-2 text-sm text-champagne focus:outline-none focus:border-gold">
+                    <option value="all">Any Price</option>
+                    <option value="10000">Under $10,000</option>
+                    <option value="25000">Under $25,000</option>
+                    <option value="50000">Under $50,000</option>
+                    <option value="100000">Under $100,000</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-wider text-gold mb-2 font-semibold">Movement Type</label>
+                <select id="movementFilter" onchange="applyAdvancedFilters()" class="w-full bg-surface border border-gold/20 rounded-lg px-3 py-2 text-sm text-champagne focus:outline-none focus:border-gold">
+                    <option value="All">All Movements</option>
+                    <option value="Automatic">Automatic Self-Winding</option>
+                    <option value="Manual">Manual Mechanical</option>
+                    <option value="Tourbillon">Tourbillon Escapement</option>
+                    <option value="Quartz">High-Precision Quartz</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Dynamic JavaScript Product Cards will be injected here -->
+        </div>
+
+        <!-- Pagination Simulation for 1000+ Catalog -->
+        <div class="mt-16 flex justify-center items-center space-x-2">
+            <button class="px-4 py-2 rounded-lg glass-card text-xs text-champagne/60 hover:text-gold disabled:opacity-50">Previous</button>
+            <button class="px-4 py-2 rounded-lg bg-gold text-obsidian text-xs font-bold">1</button>
+            <button class="px-4 py-2 rounded-lg glass-card text-xs text-champagne hover:border-gold">2</button>
+            <button class="px-4 py-2 rounded-lg glass-card text-xs text-champagne hover:border-gold">3</button>
+            <span class="text-champagne/40 px-2">...</span>
+            <button class="px-4 py-2 rounded-lg glass-card text-xs text-champagne hover:border-gold">104</button>
+            <button class="px-4 py-2 rounded-lg glass-card text-xs text-champagne hover:text-gold">Next</button>
+        </div>
+    </main>
+
+    <!-- Slide-out Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer(false)"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-obsidian border-l border-gold/20 flex flex-col shadow-2xl">
+                <!-- Cart Header -->
+                <div class="p-6 border-b border-gold/20 flex items-center justify-between bg-surface/50">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-bag-shopping text-gold text-xl"></i>
+                        <h2 class="text-xl font-luxury font-bold">Your Horology Vault</h2>
+                    </div>
+                    <button onclick="toggleCartDrawer(false)" class="text-champagne/60 hover:text-gold p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-gold/10">
+                    <!-- Dynamic Cart Items -->
+                </div>
+
+                <!-- Cart Footer & Totals -->
+                <div class="p-6 border-t border-gold/20 bg-surface/80 space-y-4">
+                    <!-- Promo Code Input -->
+                    <div class="flex space-x-2">
+                        <input type="text" id="promoInput" placeholder="Promo Code (e.g., AURA10)" class="flex-1 bg-obsidian border border-gold/30 rounded-lg px-3 py-2 text-xs text-champagne uppercase placeholder-champagne/40 focus:outline-none focus:border-gold">
+                        <button onclick="applyPromoCode()" class="px-4 py-2 bg-gold/20 border border-gold/50 rounded-lg text-xs font-semibold text-gold hover:bg-gold hover:text-obsidian transition-all">Apply</button>
+                    </div>
+                    <div id="promoMessage" class="text-xs text-gold hidden"></div>
+
+                    <!-- Luxury Gift Box Toggle -->
+                    <div class="flex items-center justify-between py-2 border-y border-gold/10 text-xs">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-gift text-gold"></i>
+                            <span>Handcrafted Lacquered Wooden Presentation Box</span>
+                        </div>
+                        <input type="checkbox" id="giftBoxToggle" onchange="updateCartTotals()" class="accent-gold w-4 h-4 cursor-pointer">
+                    </div>
+
+                    <!-- Breakdown -->
+                    <div class="space-y-1.5 text-xs text-champagne/80">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotalDisplay">$0.00</span>
+                        </div>
+                        <div id="discountRow" class="flex justify-between text-gold hidden">
+                            <span>Discount (10%)</span>
+                            <span id="cartDiscountDisplay">-$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Armored Insured Shipping</span>
+                            <span>FREE</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Estimated Luxury Tax (8%)</span>
+                            <span id="cartTaxDisplay">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-base font-bold text-champagne pt-2 border-t border-gold/20">
+                            <span>Grand Total</span>
+                            <span id="cartTotalDisplay" class="gold-gradient-text">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="proceedToCheckout()" class="w-full gold-btn py-4 rounded-xl font-medium tracking-wider uppercase text-sm shadow-xl flex items-center justify-center space-x-2">
+                        <span>Proceed to Secure Checkout</span>
+                        <i class="fa-solid fa-lock text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity" onclick="closeProductModal()"></div>
+            <div class="relative w-full max-w-4xl transform overflow-hidden rounded-3xl glass-panel p-6 sm:p-10 text-left align-middle shadow-2xl transition-all border border-gold/30">
+                <button onclick="closeProductModal()" class="absolute top-6 right-6 text-champagne/60 hover:text-gold text-2xl z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div id="modalContentContainer">
+                    <!-- Dynamic modal content injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="fixed inset-0 bg-black/85 backdrop-blur-md"></div>
+            <div class="relative w-full max-w-3xl transform overflow-hidden rounded-3xl glass-panel p-6 sm:p-10 text-left align-middle shadow-2xl transition-all border border-gold/30">
+                <div class="flex justify-between items-center mb-8 pb-4 border-b border-gold/20">
+                    <div>
+                        <h2 class="text-2xl font-luxury font-bold gold-gradient-text">Secure Checkout Gateway</h2>
+                        <span id="checkoutStepIndicator" class="text-xs text-gold/70 tracking-widest uppercase">Step 1 of 3: Client Details</span>
+                    </div>
+                    <button onclick="closeCheckoutModal()" class="text-champagne/60 hover:text-gold text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Checkout Step 1: Customer Details Form -->
+                <div id="checkoutStep1" class="space-y-6">
+                    <h3 class="text-lg font-luxury font-semibold text-gold">1. Customer & Shipping Information</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Full Legal Name</label>
+                            <input type="text" id="custName" placeholder="Lord / Lady Alexander Vance" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Secure Email Address</label>
+                            <input type="email" id="custEmail" placeholder="vance@geneva-holdings.ch" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Encrypted Phone Number</label>
+                            <input type="tel" id="custPhone" placeholder="+41 22 819 9100" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">City & Country</label>
+                            <input type="text" id="custCity" placeholder="Geneva, Switzerland" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Armored Courier Street Address</label>
+                            <input type="text" id="custAddress" placeholder="Rue du Rhône 42" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                    </div>
+                    <div class="flex justify-end pt-4">
+                        <button onclick="goToCheckoutStep(2)" class="gold-btn px-8 py-3.5 rounded-xl font-medium tracking-wider uppercase text-xs flex items-center space-x-2">
+                            <span>Proceed to Payment</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Checkout Step 2: Payment Options -->
+                <div id="checkoutStep2" class="space-y-6 hidden">
+                    <h3 class="text-lg font-luxury font-semibold text-gold">2. Select Payment Privilege</h3>
+                    
+                    <!-- Payment Tabs -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="selectPaymentMethod('upi')" id="payTabUpi" class="p-4 rounded-xl border border-gold bg-gold/10 text-center font-medium text-xs text-gold transition-all">
+                            <i class="fa-solid fa-mobile-screen text-lg mb-1 block"></i>
+                            UPI Instant
+                        </button>
+                        <button onclick="selectPaymentMethod('card')" id="payTabCard" class="p-4 rounded-xl border border-gold/30 glass-card text-center font-medium text-xs text-champagne transition-all">
+                            <i class="fa-solid fa-credit-card text-lg mb-1 block text-gold"></i>
+                            Credit / Debit Card
+                        </button>
+                        <button onclick="selectPaymentMethod('cod')" id="payTabCod" class="p-4 rounded-xl border border-gold/30 glass-card text-center font-medium text-xs text-champagne transition-all">
+                            <i class="fa-solid fa-vault text-lg mb-1 block text-gold"></i>
+                            Cash on Delivery
+                        </button>
+                    </div>
+
+                    <!-- UPI Section -->
+                    <div id="payContentUpi" class="space-y-4 p-6 glass-card rounded-2xl">
+                        <p class="text-xs text-champagne/80">Scan the secure biometric QR code via your preferred luxury banking UPI handle (Google Pay, PhonePe, BHIM, SwissBanc UPI):</p>
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <div class="bg-white p-4 rounded-xl shadow-lg w-40 h-40 flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-qrcode text-7xl text-obsidian"></i>
+                                    <span class="block text-[10px] text-obsidian font-bold mt-1">SCAN & PAY</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 space-y-3 w-full">
+                                <label class="block text-xs uppercase tracking-wider text-champagne/70">Or Enter UPI ID / VPA</label>
+                                <input type="text" id="upiIdInput" placeholder="aurahorology@oksbi" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                                <span class="text-[11px] text-gold/60 block"><i class="fa-solid fa-shield-halved mr-1"></i> Secured by 256-bit Swiss Encryption</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Section -->
+                    <div id="payContentCard" class="space-y-4 p-6 glass-card rounded-2xl hidden">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Card Number</label>
+                            <input type="text" placeholder="4532 •••• •••• 8821" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">Expiry Date</label>
+                                <input type="text" placeholder="MM / YY" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-wider text-champagne/70 mb-1">CVV / Secure Code</label>
+                                <input type="password" placeholder="•••" class="w-full bg-surface border border-gold/20 rounded-xl px-4 py-3 text-sm text-champagne focus:outline-none focus:border-gold">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COD Section -->
+                    <div id="payContentCod" class="space-y-4 p-6 glass-card rounded-2xl hidden">
+                        <div class="flex items-start space-x-3 text-gold">
+                            <i class="fa-solid fa-triangle-exclamation text-xl mt-0.5"></i>
+                            <div>
+                                <h4 class="text-sm font-semibold">Cash on Delivery Verification Notice</h4>
+                                <p class="text-xs text-champagne/80 mt-1">Due to the extreme valuation of master-class timepieces, Cash on Delivery is subject to phone verification by our Geneva concierge prior to armored dispatch.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between pt-4">
+                        <button onclick="goToCheckoutStep(1)" class="px-6 py-3 rounded-xl glass-card text-xs text-champagne hover:border-gold">Back</button>
+                        <button onclick="completeOrder()" class="gold-btn px-8 py-3.5 rounded-xl font-medium tracking-wider uppercase text-xs flex items-center space-x-2">
+                            <span>Authorize & Place Order</span>
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Checkout Step 3: Order Confirmation -->
+                <div id="checkoutStep3" class="space-y-6 text-center py-6 hidden">
+                    <div class="w-20 h-20 bg-gold/20 border border-gold rounded-full flex items-center justify-center mx-auto text-gold text-3xl animate-bounce">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h3 class="text-3xl font-luxury font-bold gold-gradient-text">Order Confirmed Successfully</h3>
+                    <p class="text-sm text-champagne/80 max-w-md mx-auto">
+                        Thank you for acquiring a masterpiece from AURA HOROLOGY. Your order has been registered in the Geneva vault.
+                    </p>
+                    <div class="p-6 glass-card rounded-2xl max-w-md mx-auto text-left space-y-2 text-xs">
+                        <div class="flex justify-between border-b border-gold/10 pb-2">
+                            <span class="text-champagne/60">Order Identification:</span>
+                            <span id="confOrderId" class="font-mono text-gold font-bold">#AURA-89423</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gold/10 pb-2">
+                            <span class="text-champagne/60">Courier Service:</span>
+                            <span class="font-semibold">Brink's Armored Transport</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gold/10 pb-2">
+                            <span class="text-champagne/60">Estimated Delivery:</span>
+                            <span class="font-semibold text-gold">3-5 Business Days</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-champagne/60">Total Paid:</span>
+                            <span id="confOrderTotal" class="font-bold">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="pt-4">
+                        <button onclick="finishAndReset()" class="gold-btn px-8 py-3.5 rounded-xl font-medium tracking-wider uppercase text-xs">
+                            Return to Vault & Continue Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div id="wishlistModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="fixed inset-0 bg-black/80 backdrop-blur-md" onclick="toggleWishlistModal()"></div>
+            <div class="relative w-full max-w-2xl transform overflow-hidden rounded-3xl glass-panel p-6 sm:p-8 text-left align-middle shadow-2xl transition-all border border-gold/30">
+                <div class="flex justify-between items-center mb-6 pb-4 border-b border-gold/20">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-heart text-gold text-xl"></i>
+                        <h2 class="text-xl font-luxury font-bold">Saved Masterpieces</h2>
+                    </div>
+                    <button onclick="toggleWishlistModal()" class="text-champagne/60 hover:text-gold text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div id="wishlistContainer" class="space-y-4 max-h-96 overflow-y-auto divide-y divide-gold/10">
+                    <!-- Dynamic wishlist items -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 space-y-3 pointer-events-none"></div>
+
+    <!-- Footer -->
+    <footer class="glass-panel border-t border-gold/20 mt-20 py-12 text-champagne/70 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <i class="fa-solid fa-clock text-gold text-lg"></i>
+                    <span class="text-lg font-luxury font-bold gold-gradient-text">AURA HOROLOGY</span>
+                </div>
+                <p class="text-champagne/60 leading-relaxed mb-4">
+                    Purveyors of ultra-luxury timepieces, grand complications, and exclusive Swiss craftsmanship since 1894.
+                </p>
+                <div class="flex space-x-4 text-gold text-base">
+                    <a href="#" class="hover:text-champagne transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-champagne transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="hover:text-champagne transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-luxury font-semibold text-gold text-sm uppercase tracking-wider mb-4">Vault Categories</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="filterCategory('Chronograph')" class="hover:text-gold transition-colors">Grand Chronographs</a></li>
+                    <li><a href="#" onclick="filterCategory('Tourbillon')" class="hover:text-gold transition-colors">Tourbillon Escapements</a></li>
+                    <li><a href="#" onclick="filterCategory('Diver')" class="hover:text-gold transition-colors">Professional Divers</a></li>
+                    <li><a href="#" onclick="filterCategory('Automatic')" class="hover:text-gold transition-colors">Automatic Dress Watches</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-luxury font-semibold text-gold text-sm uppercase tracking-wider mb-4">Concierge Services</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="openVipConcierge()" class="hover:text-gold transition-colors">VIP Private Sourcing</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Armored Worldwide Shipping</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Authentication & Certification</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Bespoke Engraving</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-luxury font-semibold text-gold text-sm uppercase tracking-wider mb-4">Geneva Boutique</h4>
+                <p class="text-champagne/60 mb-2">Rue du Rhône 88, 1204 Genève, Switzerland</p>
+                <p class="text-champagne/60 mb-2">Concierge: +41 22 900 1894</p>
+                <p class="text-gold font-semibold">Open by Private Appointment Only</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-gold/10 text-center text-champagne/50">
+            &copy; 2026 AURA HOROLOGY SA. All rights reserved. Certified Swiss Made.
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // 30 Distinct Luxury Masterpieces representing the 1000+ catalog with unique images & specs
+        const products = [
+            {
+                id: 1,
+                name: "Rolex Cosmograph Daytona 'Rainbow' Gold",
+                brand: "Rolex",
+                category: "Chronograph",
+                movement: "Automatic",
+                price: 125000,
+                rating: 4.9,
+                reviewsCount: 48,
+                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Scratch-resistant Sapphire",
+                powerReserve: "72 Hours",
+                strap: "18k Everose Gold Oyster Bracelet",
+                description: "An exceptional masterpiece adorned with baguette-cut multicolored sapphires on the bezel. Equipped with caliber 4130 self-winding chronograph."
+            },
+            {
+                id: 2,
+                name: "Patek Philippe Grandmaster Chime 5175",
+                brand: "Patek Philippe",
+                category: "Tourbillon",
+                movement: "Manual",
+                price: 110000,
+                rating: 5.0,
+                reviewsCount: 32,
+                image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=800&q=80",
+                caseSize: "47.7mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Box Sapphire Crystal",
+                powerReserve: "72 Hours",
+                strap: "Hand-stitched Alligator Leather",
+                description: "The most complicated wristwatch crafted by Patek Philippe, featuring 20 complications including five striking modes."
+            },
+            {
+                id: 3,
+                name: "Audemars Piguet Royal Oak Perpetual Calendar",
+                brand: "Audemars Piguet",
+                category: "Automatic",
+                price: 95000,
+                rating: 4.9,
+                reviewsCount: 64,
+                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+                caseSize: "41mm",
+                waterResistance: "50m / 165ft",
+                crystal: "Glareproofed Sapphire",
+                powerReserve: "40 Hours",
+                strap: "18-carat Pink Gold Integrated Bracelet",
+                description: "Ultra-thin automatic perpetual calendar in 18-carat pink gold with 'Grande Tapisserie' dial and moon phase indicator."
+            },
+            {
+                id: 4,
+                name: "Omega Seamaster Planet Ocean Deep Black",
+                brand: "Omega",
+                category: "Diver",
+                price: 14200,
+                rating: 4.8,
+                reviewsCount: 112,
+                image: "https://images.unsplash.com/photo-1548171435-edd5c5b4e287?auto=format&fit=crop&w=800&q=80",
+                caseSize: "45.5mm",
+                waterResistance: "600m / 2000ft",
+                crystal: "Domed Scratch-Resistant Sapphire",
+                powerReserve: "60 Hours",
+                strap: "Black Rubber with Antimicrobial Treatment",
+                description: "Master Chronometer certified ceramic dive watch built to withstand extreme hydrostatic pressures in the abyss."
+            },
+            {
+                id: 5,
+                name: "Cartier Tank Louis Cartier Large Model",
+                brand: "Cartier",
+                category: "Minimalist",
+                price: 13500,
+                rating: 4.7,
+                reviewsCount: 89,
+                image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80",
+                caseSize: "33.7mm x 25.5mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Mineral Crystal",
+                powerReserve: "Manual Winding",
+                strap: "Black Semi-Matte Alligator Leather",
+                description: "The quintessential embodiment of timeless elegance. 18k yellow gold case with beaded crown set with a sapphire cabochon."
+            },
+            {
+                id: 6,
+                name: "Vacheron Constantin Overseas Tourbillon",
+                brand: "Vacheron Constantin",
+                category: "Tourbillon",
+                price: 118000,
+                rating: 4.9,
+                reviewsCount: 27,
+                image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80",
+                caseSize: "42.5mm",
+                waterResistance: "50m / 165ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "80 Hours",
+                strap: "Interchangeable 18k Pink Gold & Rubber",
+                description: "An ultra-thin self-winding tourbillon timepiece featuring a striking blue sunburst lacquered dial and Geneva seal."
+            },
+            {
+                id: 7,
+                name: "Tag Heuer Monaco Calibre 11 Chronograph",
+                brand: "Tag Heuer",
+                category: "Chronograph",
+                price: 7350,
+                rating: 4.6,
+                reviewsCount: 95,
+                image: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=800&q=80",
+                caseSize: "39mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Beveled Sapphire Crystal",
+                powerReserve: "40 Hours",
+                strap: "Perforated Black Calfskin Leather",
+                description: "The iconic square-dial racing chronograph immortalized by Steve McQueen at the 24 Hours of Le Mans."
+            },
+            {
+                id: 8,
+                name: "IWC Schaffhausen Big Pilot's Watch Perpetual",
+                brand: "IWC Schaffhausen",
+                category: "Heritage",
+                price: 32500,
+                rating: 4.8,
+                reviewsCount: 41,
+                image: "https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&w=800&q=80",
+                caseSize: "46.5mm",
+                waterResistance: "60m / 200ft",
+                crystal: "Ar-coated Sapphire Crystal",
+                powerReserve: "168 Hours (7 Days)",
+                strap: "Brown Calfskin by Santoni",
+                description: "Legendary pilot timepiece with 7-day power reserve, perpetual calendar, and iconic onion-shaped crown."
+            },
+            {
+                id: 9,
+                name: "Breitling Navimeter B01 Chronograph 43",
+                brand: "Breitling",
+                category: "Chronograph",
+                price: 9800,
+                rating: 4.7,
+                reviewsCount: 83,
+                image: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=800&q=80",
+                caseSize: "43mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Cambered Sapphire Crystal",
+                powerReserve: "70 Hours",
+                strap: "Stainless Steel Navitimer Bracelet",
+                description: "The quintessential aviation watch featuring the iconic circular slide rule for flight navigation calculations."
+            },
+            {
+                id: 10,
+                name: "Hublot Big Bang Unico Titanium Ceramic",
+                brand: "Hublot",
+                category: "Automatic",
+                price: 21500,
+                rating: 4.6,
+                reviewsCount: 55,
+                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=800&q=80",
+                caseSize: "44mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Sapphire with Anti-reflective Treatment",
+                powerReserve: "72 Hours",
+                strap: "Structured Black & Grey Lined Rubber",
+                description: "Bold fusion of satin-finished titanium and black ceramic bezel with an open-worked skeleton chronograph movement."
+            },
+            {
+                id: 11,
+                name: "Rolex Submariner Date 'Starbucks'",
+                brand: "Rolex",
+                category: "Diver",
+                price: 16500,
+                rating: 4.9,
+                reviewsCount: 140,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+                caseSize: "41mm",
+                waterResistance: "300m / 1000ft",
+                crystal: "Scratch-resistant Sapphire",
+                powerReserve: "70 Hours",
+                strap: "Oystersteel Three-piece Links",
+                description: "The benchmark among divers' watches featuring a striking green Cerachrom bezel insert and deep black dial."
+            },
+            {
+                id: 12,
+                name: "Omega Speedmaster Moonwatch Professional",
+                brand: "Omega",
+                category: "Chronograph",
+                price: 8100,
+                rating: 4.9,
+                reviewsCount: 210,
+                image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=800&q=80",
+                caseSize: "42mm",
+                waterResistance: "50m / 165ft",
+                crystal: "Hesalite Crystal with Omega Logo",
+                powerReserve: "50 Hours",
+                strap: "Nylon Fabric / Velcro Space Strap",
+                description: "The legendary chronograph worn by astronauts on all six lunar missions. Powered by Co-Axial Master Chronometer Calibre 3861."
+            },
+            {
+                id: 13,
+                name: "Patek Philippe Nautilus 5711/1R",
+                brand: "Patek Philippe",
+                category: "Automatic",
+                price: 105000,
+                rating: 5.0,
+                reviewsCount: 78,
+                image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "120m / 400ft",
+                crystal: "Sapphire Crystal Caseback",
+                powerReserve: "45 Hours",
+                strap: "18k Rose Gold Bracelet with Fold-over Clasp",
+                description: "Sport-chic elegance at its absolute zenith. 18k rose gold case paired with a warm brown gradient horizontally embossed dial."
+            },
+            {
+                id: 14,
+                name: "Audemars Piguet Royal Oak Offshore Chronograph",
+                brand: "Audemars Piguet",
+                category: "Chronograph",
+                price: 41000,
+                rating: 4.7,
+                reviewsCount: 46,
+                image: "https://images.unsplash.com/photo-1526406915894-7bcd65f60845?auto=format&fit=crop&w=800&q=80",
+                caseSize: "43mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Glareproofed Sapphire Crystal",
+                powerReserve: "70 Hours",
+                strap: "Interchangeable Black Rubber Strap",
+                description: "Muscular sports chronograph with smoked khaki green 'Méga Tapisserie' dial and robust ceramic pushpieces."
+            },
+            {
+                id: 15,
+                name: "Cartier Santos de Cartier Large",
+                brand: "Cartier",
+                category: "Minimalist",
+                price: 8400,
+                rating: 4.8,
+                reviewsCount: 115,
+                image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=800&q=80",
+                caseSize: "39.8mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "42 Hours",
+                strap: "Steel Bracelet with SmartLink Sizing",
+                description: "Conceived by Louis Cartier in 1904 for aviation pioneer Alberto Santos-Dumont. Iconic screwed bezel and silvered opaline dial."
+            },
+            {
+                id: 16,
+                name: "Vacheron Constantin Historiques American 1921",
+                brand: "Vacheron Constantin",
+                category: "Heritage",
+                price: 39500,
+                rating: 4.9,
+                reviewsCount: 19,
+                image: "https://images.unsplash.com/photo-1518131672338-0639b8bc7339?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Box Sapphire Crystal",
+                powerReserve: "65 Hours",
+                strap: "Dark Brown Vintage Calfskin by Serapian",
+                description: "A daring cushion-shaped avant-garde timepiece with a diagonal time display originally designed for American drivers in the roaring twenties."
+            },
+            {
+                id: 17,
+                name: "Rolex Datejust 41 Wimbledon Dial",
+                brand: "Rolex",
+                category: "Automatic",
+                price: 11200,
+                rating: 4.8,
+                reviewsCount: 160,
+                image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80",
+                caseSize: "41mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Cyclops Lens over Date",
+                powerReserve: "70 Hours",
+                strap: "Jubilee Five-piece Links Bracelet",
+                description: "Distinguished by its slate grey dial featuring green-outlined Roman numerals—the signature Wimbledon tournament aesthetic."
+            },
+            {
+                id: 18,
+                name: "Omega Seamaster Diver 300M 007 Edition",
+                brand: "Omega",
+                category: "Diver",
+                price: 9500,
+                rating: 4.8,
+                reviewsCount: 92,
+                image: "https://images.unsplash.com/photo-1509718443690-d8e2fb3474b7?auto=format&fit=crop&w=800&q=80",
+                caseSize: "42mm",
+                waterResistance: "300m / 1000ft",
+                crystal: "Domed Sapphire Crystal",
+                powerReserve: "55 Hours",
+                strap: "Grade 2 Titanium Mesh Bracelet",
+                description: "Built with military-grade titanium as worn by James Bond in No Time To Die. Tropical brown aluminum dial and bezel."
+            },
+            {
+                id: 19,
+                name: "Patek Philippe Calatrava 6119R",
+                brand: "Patek Philippe",
+                category: "Minimalist",
+                price: 31200,
+                rating: 4.9,
+                reviewsCount: 38,
+                image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+                caseSize: "39mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "65 Hours",
+                strap: "Shiny Chocolate Brown Alligator",
+                description: "The archetype of the classic round wristwatch. Featuring a guilloched 'Clous de Paris' hobnail bezel in 18k rose gold."
+            },
+            {
+                id: 20,
+                name: "Tag Heuer Carrera Chronograph Tourbillon",
+                brand: "Tag Heuer",
+                category: "Tourbillon",
+                price: 24000,
+                rating: 4.7,
+                reviewsCount: 24,
+                image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=800&q=80",
+                caseSize: "45mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Beveled Sapphire Crystal",
+                powerReserve: "65 Hours",
+                strap: "Black Matte Alligator on Rubber",
+                description: "COSC-certified tourbillon chronograph housed inside a lightweight grade 5 titanium black PVD coated case."
+            },
+            {
+                id: 21,
+                name: "IWC Portugieser Automatic 40",
+                brand: "IWC Schaffhausen",
+                category: "Automatic",
+                price: 7650,
+                rating: 4.7,
+                reviewsCount: 67,
+                image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40.4mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Sapphire Glass, Convex",
+                powerReserve: "60 Hours",
+                strap: "Black Alligator Leather",
+                description: "Clean, open dial design with small seconds at 6 o'clock in the spirit of classic marine chronometers."
+            },
+            {
+                id: 22,
+                name: "Breitling Superocean Heritage B20 Automatic",
+                brand: "Breitling",
+                category: "Diver",
+                price: 5800,
+                rating: 4.6,
+                reviewsCount: 88,
+                image: "https://images.unsplash.com/photo-1495856458515-063d185a551b?auto=format&fit=crop&w=800&q=80",
+                caseSize: "44mm",
+                waterResistance: "200m / 660ft",
+                crystal: "Cambered Sapphire",
+                powerReserve: "70 Hours",
+                strap: "Woven Steel Aero Classic Bracelet",
+                description: "Modern-retro dive watch combining iconic 1950s design elements with state-of-the-art ceramic bezel technology."
+            },
+            {
+                id: 23,
+                name: "Hublot Classic Fusion Aerofusion Chronograph",
+                brand: "Hublot",
+                category: "Chronograph",
+                price: 17900,
+                rating: 4.5,
+                reviewsCount: 42,
+                image: "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=800&q=80",
+                caseSize: "45mm",
+                waterResistance: "50m / 165ft",
+                crystal: "Sapphire with Anti-reflective Coating",
+                powerReserve: "42 Hours",
+                strap: "Black Rubber and Alligator Leather",
+                description: "Sleek satin-finished titanium case revealing the intricate mechanical heartbeat through a transparent sapphire dial."
+            },
+            {
+                id: 24,
+                name: "Rolex GMT-Master II 'Pepsi' Jubilee",
+                brand: "Rolex",
+                category: "Heritage",
+                price: 17800,
+                rating: 5.0,
+                reviewsCount: 195,
+                image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Scratch-resistant Sapphire",
+                powerReserve: "70 Hours",
+                strap: "Jubilee Bracelet with Easylink",
+                description: "The ultimate traveler's watch featuring a red and blue Cerachrom bezel and independent 24-hour hand."
+            },
+            {
+                id: 25,
+                name: "Audemars Piguet Code 11.59 Selfwinding",
+                brand: "Audemars Piguet",
+                category: "Automatic",
+                price: 33200,
+                rating: 4.6,
+                reviewsCount: 31,
+                image: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=800&q=80",
+                caseSize: "41mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Double Curved Sapphire Crystal",
+                powerReserve: "70 Hours",
+                strap: "Black Rubber-Coated Calfskin",
+                description: "Complex case architecture featuring an octagonal middle case ring embedded within a round 18k white gold housing."
+            },
+            {
+                id: 26,
+                name: "Cartier Ballon Bleu de Cartier 42mm",
+                brand: "Cartier",
+                category: "Minimalist",
+                price: 7100,
+                rating: 4.7,
+                reviewsCount: 104,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+                caseSize: "42mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "40 Hours",
+                strap: "Stainless Steel Interlinked Bracelet",
+                description: "Floating like a balloon, the sapphire cabochon winding crown is safely nestled beneath a protective arc of precious metal."
+            },
+            {
+                id: 27,
+                name: "Vacheron Constantin Patrimony Manual-Winding",
+                brand: "Vacheron Constantin",
+                category: "Minimalist",
+                price: 24500,
+                rating: 4.8,
+                reviewsCount: 29,
+                image: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "40 Hours",
+                strap: "Mississippiensis Alligator Leather",
+                description: "Pure minimalism inspired by 1950s modernist watches. Slender 18k pink gold case with curved silvered dial."
+            },
+            {
+                id: 28,
+                name: "Omega Constellation Co-Axial Master Chronometer",
+                brand: "Omega",
+                category: "Automatic",
+                price: 7200,
+                rating: 4.7,
+                reviewsCount: 68,
+                image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
+                caseSize: "39mm",
+                waterResistance: "50m / 165ft",
+                crystal: "Domed Scratch-Resistant Sapphire",
+                powerReserve: "55 Hours",
+                strap: "Steel & 18k Sedna Gold Bracelet",
+                description: "Characterized by its famous half-moon 'claws' on the case and striking silk-embossed champagne dial."
+            },
+            {
+                id: 29,
+                name: "Patek Philippe Complications Annual Calendar",
+                brand: "Patek Philippe",
+                category: "Automatic",
+                price: 52000,
+                rating: 4.9,
+                reviewsCount: 45,
+                image: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=800&q=80",
+                caseSize: "40mm",
+                waterResistance: "30m / 100ft",
+                crystal: "Sapphire Crystal",
+                powerReserve: "45 Hours",
+                strap: "Alligator Leather with Fold-over Clasp",
+                description: "Ingenious annual calendar mechanism requiring manual correction only once a year at the end of February."
+            },
+            {
+                id: 30,
+                name: "Rolex Sky-Dweller Everose Gold Oysterflex",
+                brand: "Rolex",
+                category: "Heritage",
+                price: 48500,
+                rating: 4.9,
+                reviewsCount: 71,
+                image: "https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&w=800&q=80",
+                caseSize: "42mm",
+                waterResistance: "100m / 330ft",
+                crystal: "Scratch-resistant Sapphire",
+                powerReserve: "72 Hours",
+                strap: "Oysterflex High-Performance Elastomer",
+                description: "The sophisticated watch for global travelers featuring Saros annual calendar and Ring Command bezel interaction."
+            }
+        ];
+
+        // Application State
+        let cart = JSON.parse(localStorage.getItem('aura_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('aura_wishlist')) || [];
+        let currentCurrency = 'USD';
+        let currencyRates = { USD: 1, EUR: 0.92, INR: 83.5 };
+        let currencySymbols = { USD: '$', EUR: '€', INR: '₹' };
+        let activeCategory = 'All';
+        let currentDiscountPercent = 0;
+        let selectedPaymentType = 'upi';
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderProducts(products);
+            updateCartBadge();
+            updateWishlistBadge();
+            
+            // Search Event Listeners
+            document.getElementById('searchInput').addEventListener('input', (e) => filterAndSearch(e.target.value));
+            document.getElementById('mobileSearchInput').addEventListener('input', (e) => filterAndSearch(e.target.value));
+        };
+
+        // Currency Conversion Helper
+        function formatPrice(usdPrice) {
+            const rate = currencyRates[currentCurrency];
+            const symbol = currencySymbols[currentCurrency];
+            const converted = usdPrice * rate;
+            if (currentCurrency === 'INR') {
+                return symbol + converted.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+            } else {
+                return symbol + converted.toLocaleString('en-US', { maximumFractionDigits: 0 });
+            }
+        }
+
+        function changeCurrency(newCurr) {
+            currentCurrency = newCurr;
+            renderProducts(getFilteredProducts());
+            updateCartDrawerUI();
+            showToast(`Currency updated to ${newCurr}`, 'info');
+        }
+
+        // Render Product Cards
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-20 text-champagne/60">
+                    <i class="fa-solid fa-face-grimace text-4xl mb-3 text-gold/50"></i>
+                    <p class="text-lg">No timepieces found matching your refined criteria in our Geneva vault.</p>
+                </div>`;
+                return;
+            }
+
+            items.forEach(product => {
+                const isWishlisted = wishlist.includes(product.id);
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-3xl overflow-hidden flex flex-col justify-between group relative";
+                card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden bg-surface/50 cursor-pointer" onclick="openProductModal(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x600/14141c/d4af37?text=Aura+Horology'">
+                        <div class="absolute top-3 right-3 z-10">
+                            <button onclick="event.stopPropagation(); toggleWishlist(${product.id})" class="w-9 h-9 rounded-full glass-panel flex items-center justify-center text-champagne hover:text-gold transition-colors">
+                                <i class="${isWishlisted ? 'fa-solid text-gold' : 'fa-regular'} fa-heart"></i>
+                            </button>
+                        </div>
+                        <span class="absolute bottom-3 left-3 px-3 py-1 rounded-full bg-obsidian/80 backdrop-blur-md border border-gold/30 text-[10px] uppercase tracking-wider text-gold font-semibold">
+                            ${product.category}
+                        </span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow justify-between space-y-4">
+                        <div>
+                            <span class="text-xs text-gold/70 tracking-widest uppercase font-semibold">${product.brand}</span>
+                            <h3 class="text-lg font-luxury font-bold text-champagne mt-1 group-hover:text-gold transition-colors line-clamp-1" title="${product.name}">${product.name}</h3>
+                            <div class="flex items-center space-x-1.5 mt-2 text-xs text-gold">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold">${product.rating}</span>
+                                <span class="text-champagne/40">(${product.reviewsCount} reviews)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gold/10">
+                            <div>
+                                <span class="text-[10px] text-champagne/50 block uppercase tracking-wider">Vault Price</span>
+                                <span class="text-lg font-bold gold-gradient-text">${formatPrice(product.price)}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="gold-btn px-4 py-2.5 rounded-xl text-xs uppercase tracking-wider font-semibold shadow-lg flex items-center space-x-2">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span>Acquire</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('productCounter').innerText = `Showing 1-${items.length} of 1,248 Masterpieces`;
+        }
+
+        // Filtering & Searching Logic
+        function filterCategory(cat) {
+            activeCategory = cat;
+            // Update active tab styles
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = "category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap bg-gold text-obsidian shadow-md";
+                } else {
+                    btn.className = "category-btn px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all whitespace-nowrap glass-card hover:border-gold";
+                }
+            });
+            applyAdvancedFilters();
+        }
+
+        function filterAndSearch(query) {
+            applyAdvancedFilters();
+        }
+
+        function getFilteredProducts() {
+            const query = (document.getElementById('searchInput').value || document.getElementById('mobileSearchInput').value || '').toLowerCase();
+            const brand = document.getElementById('brandFilter').value;
+            const priceMax = document.getElementById('priceFilter').value;
+            const movement = document.getElementById('movementFilter').value;
+
+            return products.filter(p => {
+                const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+                const matchesBrand = brand === 'All' || p.brand === brand;
+                const matchesMovement = movement === 'All' || p.movement === movement;
+                const matchesPrice = priceMax === 'all' || p.price <= parseInt(priceMax);
+                const matchesSearch = p.name.toLowerCase().includes(query) || p.brand.toLowerCase().includes(query) || p.description.toLowerCase().includes(query);
+
+                return matchesCategory && matchesBrand && matchesMovement && matchesPrice && matchesSearch;
+            });
+        }
+
+        function applyAdvancedFilters() {
+            let filtered = getFilteredProducts();
+            const sortVal = document.getElementById('sortSelect').value;
+            
+            if (sortVal === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortVal === 'rating') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+
+            renderProducts(filtered);
+        }
+
+        function sortProducts(val) {
+            applyAdvancedFilters();
+        }
+
+        // Product Details Modal
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            const modalContainer = document.getElementById('modalContentContainer');
+            modalContainer.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <div class="h-80 sm:h-96 rounded-2xl overflow-hidden glass-card">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex space-x-3 overflow-x-auto pb-2">
+                            <div class="w-16 h-16 rounded-xl overflow-hidden border border-gold cursor-pointer"><img src="${product.image}" class="w-full h-full object-cover"></div>
+                            <div class="w-16 h-16 rounded-xl overflow-hidden border border-gold/30 cursor-pointer opacity-70"><img src="${product.image}" class="w-full h-full object-cover"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs text-gold tracking-widest uppercase font-semibold">${product.brand} • ${product.category}</span>
+                            <h2 class="text-2xl sm:text-3xl font-luxury font-bold text-champagne mt-1">${product.name}</h2>
+                            <div class="flex items-center space-x-2 mt-2 text-sm text-gold">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold">${product.rating}</span>
+                                <span class="text-champagne/50">(${product.reviewsCount} verified clients)</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-champagne/80 leading-relaxed">${product.description}</p>
+                        
+                        <!-- Specs Table -->
+                        <div class="p-4 rounded-xl glass-card space-y-2 text-xs">
+                            <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-champagne/60">Case Diameter</span><span class="font-semibold">${product.caseSize}</span></div>
+                            <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-champagne/60">Water Resistance</span><span class="font-semibold">${product.waterResistance}</span></div>
+                            <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-champagne/60">Crystal</span><span class="font-semibold">${product.crystal}</span></div>
+                            <div class="flex justify-between border-b border-gold/10 pb-1.5"><span class="text-champagne/60">Power Reserve</span><span class="font-semibold">${product.powerReserve}</span></div>
+                            <div class="flex justify-between"><span class="text-champagne/60">Bracelet Material</span><span class="font-semibold">${product.strap}</span></div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gold/20">
+                            <div>
+                                <span class="text-[10px] text-champagne/50 block uppercase tracking-wider">Vault Valuation</span>
+                                <span class="text-2xl font-bold gold-gradient-text">${formatPrice(product.price)}</span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button onclick="addToCart(${product.id}); closeProductModal(); toggleCartDrawer(true);" class="px-6 py-3.5 glass-card rounded-xl text-xs font-semibold uppercase tracking-wider hover:border-gold">Buy Now</button>
+                                <button onclick="addToCart(${product.id}); closeProductModal();" class="gold-btn px-6 py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider">Add to Bag</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // Cart Drawer Management
+        function toggleCartDrawer(show) {
+            const drawer = document.getElementById('cartDrawer');
+            if (show) {
+                drawer.classList.remove('hidden');
+                updateCartDrawerUI();
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveCart();
+            updateCartBadge();
+            showToast(`Added ${product.name} to your horology bag.`, 'success');
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            saveCart();
+            updateCartBadge();
+            updateCartDrawerUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            saveCart();
+            updateCartBadge();
+            updateCartDrawerUI();
+            showToast('Item removed from vault bag.', 'info');
+        }
+
+        function saveCart() {
+            localStorage.setItem('aura_cart', JSON.stringify(cart));
+        }
+
+        function updateCartBadge() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCountBadge').innerText = totalCount;
+        }
+
+        function updateCartDrawerUI() {
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-champagne/60">
+                    <i class="fa-solid fa-bag-shopping text-4xl mb-3 text-gold/40"></i>
+                    <p class="text-sm">Your horology bag is currently empty.</p>
+                </div>`;
+                document.getElementById('cartSubtotalDisplay').innerText = formatPrice(0);
+                document.getElementById('cartTaxDisplay').innerText = formatPrice(0);
+                document.getElementById('cartTotalDisplay').innerText = formatPrice(0);
+                return;
+            }
+
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "flex items-center space-x-4 py-4";
+                el.innerHTML = `
+                    <div class="w-16 h-16 rounded-xl overflow-hidden glass-card flex-shrink-0">
+                        <img src="${item.image}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-luxury font-bold text-champagne line-clamp-1">${item.name}</h4>
+                        <span class="text-xs text-gold font-semibold">${formatPrice(item.price)}</span>
+                        <div class="flex items-center space-x-3 mt-2">
+                            <div class="flex items-center space-x-2 border border-gold/20 rounded-lg px-2 py-1 bg-surface">
+                                <button onclick="updateQuantity(${item.id}, -1)" class="text-champagne/60 hover:text-gold text-xs">-</button>
+                                <span class="text-xs font-bold text-champagne">${item.quantity}</span>
+                                <button onclick="updateQuantity(${item.id}, 1)" class="text-champagne/60 hover:text-gold text-xs">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="text-red-400 hover:text-red-300 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+
+            updateCartTotals();
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discount = subtotal * currentDiscountPercent;
+            const taxable = subtotal - discount;
+            const tax = taxable * 0.08; // 8% tax
+            const giftBoxAdded = document.getElementById('giftBoxToggle').checked;
+            const giftBoxFee = giftBoxAdded ? 250 : 0;
+            const grandTotal = taxable + tax + giftBoxFee;
+
+            document.getElementById('cartSubtotalDisplay').innerText = formatPrice(subtotal);
+            if (currentDiscountPercent > 0) {
+                document.getElementById('discountRow').classList.remove('hidden');
+                document.getElementById('cartDiscountDisplay').innerText = '-' + formatPrice(discount);
+            } else {
+                document.getElementById('discountRow').classList.add('hidden');
+            }
+            document.getElementById('cartTaxDisplay').innerText = formatPrice(tax + giftBoxFee);
+            document.getElementById('cartTotalDisplay').innerText = formatPrice(grandTotal);
+        }
+
+        function applyPromoCode() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msg = document.getElementById('promoMessage');
+            msg.classList.remove('hidden');
+
+            if (code === 'AURA10') {
+                currentDiscountPercent = 0.10;
+                msg.innerText = "Promo 'AURA10' applied: 10% discount unlocked!";
+                msg.className = "text-xs text-gold";
+                updateCartTotals();
+                showToast('Promo code applied successfully!', 'success');
+            } else {
+                currentDiscountPercent = 0;
+                msg.innerText = "Invalid promo code. Try 'AURA10'.";
+                msg.className = "text-xs text-red-400";
+                updateCartTotals();
+            }
+        }
+
+        // Wishlist System
+        function toggleWishlist(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast('Removed from wishlist.', 'info');
+            } else {
+                wishlist.push(id);
+                showToast('Added to your saved wishlist.', 'success');
+            }
+            localStorage.setItem('aura_wishlist', JSON.stringify(wishlist));
+            updateWishlistBadge();
+            renderProducts(getFilteredProducts());
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.getElementById('wishlistBadge');
+            if (wishlist.length > 0) {
+                badge.innerText = wishlist.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function toggleWishlistModal() {
+            const modal = document.getElementById('wishlistModal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                const container = document.getElementById('wishlistContainer');
+                container.innerHTML = '';
+                if (wishlist.length === 0) {
+                    container.innerHTML = `<p class="text-center text-champagne/60 py-8 text-xs">No saved watches in your wishlist.</p>`;
+                    return;
+                }
+                wishlist.forEach(id => {
+                    const p = products.find(item => item.id === id);
+                    if (!p) return;
+                    const row = document.createElement('div');
+                    row.className = "flex items-center justify-between py-3";
+                    row.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <img src="${p.image}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <h4 class="text-xs font-bold text-champagne">${p.name}</h4>
+                                <span class="text-xs text-gold">${formatPrice(p.price)}</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="addToCart(${p.id}); toggleWishlistModal(); toggleCartDrawer(true);" class="gold-btn px-3 py-1.5 rounded-lg text-[10px] uppercase font-semibold">Acquire</button>
+                            <button onclick="toggleWishlist(${p.id}); toggleWishlistModal();" class="text-red-400 p-1.5 text-xs"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(row);
+                });
+            }
+        }
+
+        // Checkout Flow
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast('Your bag is empty. Add a masterpiece before checkout.', 'error');
+                return;
+            }
+            toggleCartDrawer(false);
+            document.getElementById('checkoutModal').classList.remove('hidden');
+            goToCheckoutStep(1);
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function goToCheckoutStep(step) {
+            document.getElementById('checkoutStep1').classList.add('hidden');
+            document.getElementById('checkoutStep2').classList.add('hidden');
+            document.getElementById('checkoutStep3').classList.add('hidden');
+
+            const indicator = document.getElementById('checkoutStepIndicator');
+
+            if (step === 1) {
+                document.getElementById('checkoutStep1').classList.remove('hidden');
+                indicator.innerText = "Step 1 of 3: Client Details";
+            } else if (step === 2) {
+                const name = document.getElementById('custName').value;
+                const email = document.getElementById('custEmail').value;
+                if (!name || !email) {
+                    showToast('Please provide your full legal name and email address.', 'error');
+                    document.getElementById('checkoutStep1').classList.remove('hidden');
+                    return;
+                }
+                document.getElementById('checkoutStep2').classList.remove('hidden');
+                indicator.innerText = "Step 2 of 3: Payment Privilege";
+            } else if (step === 3) {
+                document.getElementById('checkoutStep3').classList.remove('hidden');
+                indicator.innerText = "Step 3 of 3: Order Confirmation";
+            }
+        }
+
+        function selectPaymentMethod(type) {
+            selectedPaymentType = type;
+            document.getElementById('payTabUpi').className = "p-4 rounded-xl border border-gold/30 glass-card text-center font-medium text-xs text-champagne transition-all";
+            document.getElementById('payTabCard').className = "p-4 rounded-xl border border-gold/30 glass-card text-center font-medium text-xs text-champagne transition-all";
+            document.getElementById('payTabCod').className = "p-4 rounded-xl border border-gold/30 glass-card text-center font-medium text-xs text-champagne transition-all";
+
+            document.getElementById('payContentUpi').classList.add('hidden');
+            document.getElementById('payContentCard').classList.add('hidden');
+            document.getElementById('payContentCod').classList.add('hidden');
+
+            if (type === 'upi') {
+                document.getElementById('payTabUpi').className = "p-4 rounded-xl border border-gold bg-gold/10 text-center font-medium text-xs text-gold transition-all";
+                document.getElementById('payContentUpi').classList.remove('hidden');
+            } else if (type === 'card') {
+                document.getElementById('payTabCard').className = "p-4 rounded-xl border border-gold bg-gold/10 text-center font-medium text-xs text-gold transition-all";
+                document.getElementById('payContentCard').classList.remove('hidden');
+            } else if (type === 'cod') {
+                document.getElementById('payTabCod').className = "p-4 rounded-xl border border-gold bg-gold/10 text-center font-medium text-xs text-gold transition-all";
+                document.getElementById('payContentCod').classList.remove('hidden');
+            }
+        }
+
+        function completeOrder() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discount = subtotal * currentDiscountPercent;
+            const taxable = subtotal - discount;
+            const tax = taxable * 0.08;
+            const giftBoxFee = document.getElementById('giftBoxToggle').checked ? 250 : 0;
+            const grandTotal = taxable + tax + giftBoxFee;
+
+            const randomId = '#AURA-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('confOrderId').innerText = randomId;
+            document.getElementById('confOrderTotal').innerText = formatPrice(grandTotal);
+
+            goToCheckoutStep(3);
+            cart = [];
+            saveCart();
+            updateCartBadge();
+            showToast('Order authorized and registered successfully!', 'success');
+        }
+
+        function finishAndReset() {
+            closeCheckoutModal();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openVipConcierge() {
+            showToast('VIP Geneva Concierge line opened. A horology specialist will contact you shortly.', 'success');
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let icon = 'fa-circle-check text-gold';
+            if (type === 'error') icon = 'fa-circle-exclamation text-red-400';
+            if (type === 'info') icon = 'fa-circle-info text-blue-400';
+
+            toast.className = "pointer-events-auto flex items-center space-x-3 glass-panel px-5 py-3.5 rounded-2xl border border-gold/30 shadow-2xl transition-all transform translate-y-2 opacity-0";
+            toast.innerHTML = `
+                <i class="fa-solid ${icon} text-lg"></i>
+                <span class="text-xs font-medium text-champagne">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => toast.remove(), 400);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
